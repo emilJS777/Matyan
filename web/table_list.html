@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Մատյաններ</title>
+    <script src="eel.js"></script>
+    <script src="js/lib/jquery-3.7.0.min.js"></script>
+    <script src="js/main.js" defer></script>
+    <link rel="stylesheet" href="style/main.css">
+</head>
+<body>
+    <div onclick="window.location.href = 'main.html'" class="bg-content padding-left-1 padding-right-1 f-size-22 c-pointer w-max-content m-0-auto">Գլխավոր</div>
+
+    <div id="tables" class="d-grid g-gap-2 t-center a-items-center j-content-center m-top-1 padding-2">
+
+    </div>
+    <script>
+        async function e (){
+            await eel.get_data()().then(res => {
+                for(let i = 0; i < res.length; i++){
+                    const ahref = document.createElement('a')
+                    ahref.href = `/table_new.html?number=${res[i].number}`
+                    ahref.textContent = res[i].title;
+                    const tables = document.getElementById('tables')
+                    const remove = document.createElement('span')
+                    const div = document.createElement('div')
+                    remove.textContent = "X";
+                    remove.setAttribute("data-title", res[i].title)
+                    remove.classList = "c-pointer";
+                    remove.onclick = async function (){
+                        var result = window.confirm(`Ցանկանու՞մ եք ջնջել ${res[i].title} ֆայլը:`);
+                        if(result) {
+                            eel.delete_data(res[i].number)().then(res => {
+                                if (res === true) {
+                                    alert('հաջողությամբ ջնջվել է')
+                                    location.reload()
+                                }
+                                else
+                                    alert('Ինչ որ բան այնպես չգնաց')
+                            })
+                        }
+                        return false;
+                    }
+                    div.appendChild(remove)
+                    div.appendChild(ahref)
+                    tables.appendChild(div)
+                }
+            })
+        }
+        e()
+
+
+    </script>
+
+</body>
+<style>
+    #tables{
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+    a{
+        background: burlywood;
+        padding: 10px;
+    }
+    #tables > div{
+        display: flex;
+            grid-gap: 0.3em;
+            align-items: center;
+    }
+    span{
+        background-color: #441d1d;
+        color: #fff;
+        padding: .3em;
+
+    }
+</style>
+</html>

@@ -1,0 +1,655 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+*{
+    font-family: 'Ubuntu', sans-serif;
+}
+body{
+    background-color: #f7f7f7;
+    margin: 0;
+}
+#app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #2c3e50;
+}
+h5{
+    font-size: 15px;
+}
+h4{
+    font-size: 18px;
+}
+h3{
+    font-size: 23px;
+}
+h2{
+    font-size: 30px;
+}
+label{
+    font-size: 18px;
+}
+.page, .header{
+    padding: 20px 15%;
+}
+.cut-text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    height: 1.2em;
+    white-space: nowrap;
+}
+@media only screen and (max-width: 1550px) {
+    .page, .header{
+        padding: 20px 8%;
+    }
+}
+@media only screen and (max-width: 1210px) {
+    .page, .header{
+        padding: 20px 2%;
+    }
+}
+@media only screen and (max-width: 830px) {
+    .page, .header{
+        padding: 0 2%;
+    }
+}
+.pagination{
+    background-color: #fff;
+}
+.list-style-content {
+    list-style: none; /* Remove default bullets */
+}
+
+.list-style-content li::before {
+    content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+    color: #ba6f0b; /* Change the color */
+    font-weight: bold; /* If you want it to be bold */
+    display: inline-block; /* Needed to add space between the bullet and the text */
+    width: 1em; /* Also needed for space (tweak if needed) */
+    margin-left: -1em; /* Also needed for space (tweak if needed) */
+}
+li{
+    list-style: none;
+}
+a{
+    color: inherit;
+    text-decoration: none;
+}
+.t-decoration-underline, .t-decoration-underline-hover:hover{
+    text-decoration: underline;
+}
+.l-height-1{
+    line-height: 1;
+}
+.l-height-0{
+    line-height: 0;
+}
+.t-center{
+    text-align: center;
+}
+.t-right{
+    text-align: right;
+}
+.f-right{
+    float: right;
+}
+.margin-1{
+    margin: 1em;
+}
+.margin-03{
+    margin: .3em;
+}
+.margin-05{
+    margin: .5em;
+}
+.m-0-auto{
+    margin: 0 auto;
+}
+.m-top-0{
+    margin-top: 0;
+}
+.m-top-01{
+    margin-top: .1em;
+}
+.m-top-05{
+    margin-top: 0.5em;
+}
+.m-top-1{
+    margin-top: 1em;
+}
+.m-top-1_5{
+    margin-top: 1.5em;
+}
+.m-top-2{
+    margin-top: 2em;
+}
+.m-top-3{
+    margin-top: 3em;
+}
+.m-top-8{
+    margin-top: 8em;
+}
+.m-bottom-0{
+    margin-bottom: 0;
+}
+.m-bottom-_1{
+    margin-bottom: .1em;
+}
+.m-bottom-_2{
+    margin-bottom: .2em;
+}
+.m-left-minus-1{
+    margin-left: -1em;
+}
+.m-left-05{
+    margin-left: .5em;
+}
+.m-left-1{
+    margin-left: 1em;
+}
+.m-left-2{
+    margin-left: 2em;
+}
+.m-right-03{
+    margin-right: .3em;
+}
+.m-right-05{
+    margin-right: .5em;
+}
+.m-right-1{
+    margin-right: 1em;
+}
+.m-bottom-1{
+    margin-bottom: 1em;
+}
+.m-bottom-2{
+    margin-bottom: 1em;
+}
+
+.padding-0{
+    padding: 0;
+}
+.padding-02{
+    padding: .2em;
+}
+.padding-03{
+    padding: .3em;
+}
+.padding-05{
+    padding: .5em;
+}
+.padding-1{
+    padding: 1em;
+}
+.padding-2{
+    padding: 2em;
+}
+.padding-bottom-05{
+    padding-bottom: .5em;
+}
+.padding-top-05{
+    padding-top: .5em;
+}
+.padding-top-1{
+    padding-top: 1em;
+}
+.padding-top-2{
+    padding-top: 2em;
+}
+.padding-left-1_5{
+    padding-left: 1.5em;
+}
+.padding-left-03{
+    padding-left: .3em;
+}
+.padding-left-1{
+    padding-left: 1em;
+}
+.padding-left-3{
+    padding-left: 3em;
+}
+.padding-right-1{
+    padding-right: 1em;
+}
+.c-pointer{
+    cursor: pointer;
+}
+.f-size-very-small{
+    font-size: 10px;
+}
+.f-size-small{
+    font-size: 13px;
+}
+.f-size-15{
+    font-size: 15px;
+}
+.f-size-16{
+    font-size: 16px;
+}
+.f-size-19{
+    font-size: 19px;
+}
+.f-size-22{
+    font-size: 22px;
+}
+.f-size-30{
+    font-size: 30px;
+}
+.social-icon-size{
+    font-size: 23px;
+}
+.f-weight-bold{
+    font-weight: bold;
+}
+.d-grid{
+    display: grid;
+}
+.g-gap-_3{
+    grid-gap: .3em;
+}
+.g-gap-_5{
+    grid-gap: .5em;
+}
+.g-gap-1{
+    grid-gap: 1em;
+}
+.g-gap-2{
+    grid-gap: 2em;
+}
+.g-gap-3{
+    grid-gap: 3em;
+}
+.g-gap-4{
+    grid-gap: 4em;
+}
+.g-gap-5{
+    grid-gap: 5em;
+}
+.d-flex{
+    display: flex;
+}
+.j-content-center{
+    justify-content: center;
+}
+.j-content-flex-end{
+    justify-content: flex-end;
+}
+.j-content-space-between{
+    justify-content: space-between;
+}
+.j-content-space-evenly{
+    justify-content: space-evenly;
+}
+.d-none{
+    display: none;
+}
+.d-block{
+    display: block;
+}
+.d-inline-block{
+    display: inline-block;
+}
+.d-block-hover:hover > *{
+    display: block;
+}
+.d-flex-hover:hover > *{
+    display: flex;
+}
+.a-items-flex-start{
+    align-items: flex-start;
+}
+.a-items-center{
+    align-items: center;
+}
+.a-items-flex-end{
+    align-items: flex-end;
+}
+.o-hidden{
+    overflow: hidden;
+}
+
+.b-solid-ccc{
+    border: 1px solid#ccc;
+}
+.b-bottom-ccc{
+    border-bottom: 1px solid rgba(204, 204, 204, 0.65);
+}
+.b-top-ccc{
+    border-top: 1px solid rgba(204, 204, 204, 0.65);
+}
+.b-radius-8{
+    border-radius: 8px;
+}
+.b-radius-50{
+    border-radius: 50%;
+}
+.w-max{
+    width: 100%;
+}
+.w-fit-content{
+    width: fit-content;
+}
+.max-width-max{
+    max-width: 100%;
+}
+.w-max-content{
+    width: max-content;
+}
+.w-200{
+    width: 200px;
+}
+.min-height-500{
+    min-height: 500px;
+}
+.h-max{
+    height: 100%;
+}
+.h-100-vh{
+    height: 100vh;
+}
+.h-max-content{
+    height: max-content;
+}
+.bg-initial{
+    background-color: initial !important;
+}
+.bg-red{
+    background-color: #a43030;
+}
+.bg-c3{
+    background-color: rgba(195, 195, 195, 0.19);
+}
+.bg-97{
+    background-color: #979797;
+}
+.bg-97-hover:hover{
+    background-color: #979797;
+    color: #fff;
+}
+.bg-content, .bg-content-hover:hover{
+    background-color: #ba6f0b;
+    color: #fff;
+}
+.bg-fff{
+    background-color: #fff;
+}
+.bg-ccc{
+    background-color: #ccc;
+}
+.bg-ccc-opacity-hover:hover{
+    background-color: rgba(204, 204, 204, 0.07);
+}
+.bg-ccc-opacity{
+    background-color: rgba(204, 204, 204, 0.07);
+}
+.bg-c5c-hover:hover{
+    background-color: #cccccc5c;
+}
+.bg-c5c{
+    background-color: #cccccc5c;
+}
+.bg-green{
+    background-color: #1a4d1a;
+}
+.bg-555{
+    background: #777;
+    color: #e8e8e8;
+}
+.bg-999{
+    background-color: #999;
+}
+.bg-b7{
+    background-color: #b7b7b7;
+}
+.c-content, .c-content-hover:hover{
+    color: #ba6f0b;
+}
+.c-olivie{
+    color: #808000;
+}
+.c-blue-opacity{
+    color: #005380a8;
+}
+
+.c-97{
+    color: #979797;
+}
+.c-ccc{
+    color: #ccc;
+}
+.c-555{
+    color: #555;
+}
+.c-fff{
+    color: #fff;
+}
+.c-b0{
+    color: #b08d7e;
+}
+.c-6d{
+    color: #6d6d6d;
+}
+.c-red, .c-red-hover:hover{
+    color: #a43506;
+}
+
+.b-content, .b-content-hover:hover{
+    border: 1px solid #ba6f0b;
+}
+.p-absolute{
+    position: absolute;
+}
+.p-relative{
+    position: relative;
+}
+.p-fixed{
+    position: fixed;
+}
+.absolute-center{
+    top: 50%;
+    bottom: 50%;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, -50%);
+}
+.z-index-1{
+    z-index: 1;
+}
+.z-index-5{
+    z-index: 5;
+}
+.z-index-10{
+    z-index: 10;
+}
+.z-index-max{
+    z-index: 999;
+}
+.bott-0{
+    bottom: 0;
+}
+.top-max{
+    top: 100%;
+}
+.top-0{
+    top: 0;
+}
+.right-0{
+    right: 0;
+}
+.left-0{
+    left: 0;
+}
+.bottom-0{
+    bottom: 0;
+}
+.outline-content:focus{
+    outline: 0;
+    border: 1px solid #ba6f0b;
+}
+.cut-text {
+    overflow:hidden;
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 250px;
+}
+
+.form-standard{
+    border: thin solid #ccc;
+    border-radius: 4px;
+    display: inline-block;
+    line-height: 1.5em;
+    padding: 0.5em 3.5em 0.5em 1em;
+    height: fit-content;
+}
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    background-color: rgba(204, 204, 204, 0.18);
+    z-index: 999;
+}
+.modal-content{
+    background-color: #fff;
+    padding: 25px 60px;
+    overflow-y: auto;
+    box-shadow: 0px 2px 31px -1px rgba(0,0,0,0.24);
+    -webkit-box-shadow: 0px 2px 31px -1px rgba(0,0,0,0.24);
+    -moz-box-shadow: 0px 2px 31px -1px rgba(0,0,0,0.24);
+}
+
+.animation-from-hidden{
+    animation-name: animation-from-hidden;
+    animation-duration: .5s;
+}
+.animation-from-hidden-infinite{
+    animation: animation-from-hidden-infinite 1s infinite;
+}
+@keyframes animation-from-hidden {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+@keyframes animation-from-hidden-infinite {
+    0%{
+        opacity: 1;
+    }
+    50%{
+        opacity: .5;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.err-msg{
+    color: #a43506;
+}
+
+.color-blue{
+    color: #345988;
+}
+/*IMAGE STYLE*/
+.img_parent{
+    background-color: #fff;
+    border: 2px solid #eee;
+    padding: 6px;
+    border-radius: 12px;
+    margin-top: -2em;
+}
+.img_div{
+    border: 1px solid#fff;
+    border-radius: 12px;
+}
+
+/*PAGE LOADER*/
+.loader {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    display: inline-block;
+    border-top: 6px solid #ccc;
+    border-right: 8px solid transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+.loader::after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    border-left: 8px solid #ba6f0b;
+    border-bottom: 6px solid transparent;
+    animation: rotation 0.5s linear infinite reverse;
+}
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+/*PAGINATE*/
+.paginate{
+    display: flex;
+    grid-gap: 5px;
+}
+.paginate > li{
+    border: 1px solid #e1e1e1;
+    border-radius: 6px;
+}
+.paginate > li > a{
+    display: block;
+    padding: 6px;
+    cursor: pointer;
+}
+.paginate > li.active{
+    border: 1px none;
+    color: #ba6f0b;
+}
+.paginate > li.active > a{
+    cursor: initial;
+}
+
+/*BOX SHADOW*/
+.box-shadow-slim{
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.12);
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.12);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.12);
+}
+.lang_radio label{
+    font-size: 22px !important;
+}
+.lang_radio .radios{
+    display: grid;
+    line-height: 1;
+}
+
+.order-1{
+    order: 1;
+}
+.order-2{
+    order: 2;
+}
+.order-3{
+    order: 3;
+}
+.order-4{
+    order: 4;
+}
+.text-5-line {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

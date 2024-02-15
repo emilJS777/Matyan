@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Մատյան</title>
+    <script src="eel.js"></script>
+    <script src="js/lib/jquery-3.7.0.min.js"></script>
+    <script src="js/main.js" defer></script>
+    <link rel="stylesheet" href="style/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.7/xlsx.full.min.js" defer></script>
+
+</head>
+<body>
+ <div onclick="window.location.href = 'main.html'" class="bg-content padding-left-1 padding-right-1 f-size-22 c-pointer w-max-content m-0-auto">Գլխավոր</div>
+
+    <div class="content d-grid g-gap-_3 w-max-content m-0-auto">
+
+        <input type="text" id="title" placeholder="Title" class="w-max-content f-size-22 form-standard m-0-auto m-top-2" >
+        <div class="block">
+            <table id="table-container">
+                <thead class="b-bottom-ccc"></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+       <div class="d-flex a-items-center g-gap-_3">
+            <div class="padding-1 bg-content m-top-1 w-max-content c-pointer h-max-content" onclick="save()">Պահպանել</div>
+            <div onclick="newRecord()" class="padding-1 bg-c5c m-top-1 w-max-content c-pointer h-max-content">Ավելացնել տող</div>
+
+           <div onclick="save(true)" class="c-pointer padding-1 bg-green c-ccc m-top-1 w-max-content c-pointer h-max-content">Պահպանել և Ստանալ Excel</div>
+       </div>
+    </div>
+    <script>
+
+//        GET QUERY PARAAM TITLE AND GET BY TITLE
+        const urlParams = new URLSearchParams(window.location.search);
+        const number = urlParams.get("number");
+        if(number){
+            eel.get_one_data(number)().then(res => {
+            document.getElementById('title').value = res.title;
+            for(let i = 0; i < res.list.length; i++)
+                newRecord(res.list[i]);
+          });
+        }
+
+//        GENERATE TABLE
+        const tableContainer = document.getElementById('table-container');
+        const numberOfDivs = 31;
+        const tr = document.createElement('tr');
+        const th = document.createElement('th');
+        th.textContent = "Ա. Ա. Հ.";
+        tr.appendChild(th)
+        tableContainer.children[0].appendChild(tr);
+
+        for (let i = 1; i <= numberOfDivs; i++) {
+            const th = document.createElement('th');
+            th.textContent = i;
+            th.classList = "f-size-19";
+            tr.appendChild(th)
+            tableContainer.children[0].appendChild(tr);
+        }
+        const spantTr = tr;
+        const spantTh = document.createElement('th');
+        const span = document.createElement('span');
+            span.textContent = "ընդհանուր"
+            spantTh.appendChild(span)
+            spantTr.appendChild(spantTh)
+            tableContainer.children[1].appendChild(spantTr);
+
+    //     ROWS
+        const newRecord = function (data = null){
+            const recordCount = document.getElementsByClassName('fullname').length+1;
+            const tr = document.createElement('tr');
+            const td = document.createElement('td');
+            const input = document.createElement('input');
+            const countSpan = document.createElement('span');
+            countSpan.textContent = recordCount;
+            countSpan.classList = "padding-05";
+            input.classList = "fullname form-standard";
+            input.value = data ? data.full_name : '';
+            td.appendChild(input)
+            td.appendChild(countSpan)
+            tr.appendChild(td)
+            tableContainer.children[1].appendChild(tr);
+
+            for (let i = 1; i <= numberOfDivs; i++) {
+                const td = document.createElement('td');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.name = 'checkbox';
+                checkbox.setAttribute('data-number', i);
+                if(data && data.days.includes(checkbox.getAttribute('data-number'))){
+                    checkbox.checked = true;
+                }
+                td.appendChild(checkbox);
+                tr.appendChild(td)
+                tableContainer.children[1].appendChild(tr);
+            }
+
+            const span = document.createElement('span')
+            const totalTd = document.createElement('td');
+            span.textContent = data ? data.days.length : '';
+            totalTd.appendChild(span)
+            tr.appendChild(totalTd)
+            tableContainer.children[1].appendChild(tr);
+
+            const fixedDaysButtonTd = document.createElement("td");
+            const fixedDaysButton = document.createElement("button");
+            fixedDaysButtonTd.classList = "d-flex align-center";
+            fixedDaysButton.classList = "m-top-05 fixed-days";
+            fixedDaysButton.setAttribute("data-number", countSpan);
+            fixedDaysButton.addEventListener('click', (e) => {
+                const startNumber = parseInt(prompt("Սկսած"));
+                const endNumber = parseInt(prompt("վերջ"));
+
+                const tdList = document.getElementsByTagName("tr")[recordCount].children
+                for(let i = 0; i < tdList.length; i++){
+                    const dataNumber = tdList[i].children[0].getAttribute('data-number')
+                    console.log(dataNumber)
+                    if(parseInt(dataNumber) >= startNumber && dataNumber <= endNumber ){
+                        tdList[i].children[0].checked = true;
+                    }
+                }
+
+            })
+            fixedDaysButton.textContent = "ֆիքսել օրերը";
+            fixedDaysButtonTd.appendChild(fixedDaysButton)
+            tr.appendChild(fixedDaysButtonTd)
+        }
+        if(!number){
+            newRecord()
+        }
+
+        // SAVE
+        const save = async function (exportExcel = null){
+            const title = document.getElementById('title').value
+
+            if(!title) {
+                alert('Լրացրեք ֆայլի անունը')
+                return false;
+            }
+            let data = {
+                title: title,
+                list: []
+            }
+
+            const tbody = document.getElementsByTagName('tbody')[0]
+            const tr = tbody.children;
+            for(let i = 0; i < tr.length; i++){
+                const days = [];
+                const td = tr[i].children;
+                for(let j = 1; j < td.length; j++){
+                    if(i !== 0 && i !== tr.length && td[j].children[0].checked){
+                        days.push(td[j].children[0].getAttribute('data-number'))
+                    }
+                }
+                try {
+                    if (i !== 0){
+                        data['list'].push({
+                            "full_name": tr[i].children[0].children[0].value,
+                            "days": days
+                        })
+                    }
+                }
+                catch (e){
+                    console.log(e)
+                }
+            }
+            const response = await eel.save_data(data, number ? number : null, exportExcel)();
+            if(response === true) {
+                alert('հաջողությամբ պահպանվել է')
+                window.location = "/table_list.html";
+
+            }
+        }
+
+
+    </script>
+</body>
+<style>
+
+    .block{
+        text-align: center;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+    }
+    tr:nth-child(even){
+        background-color: #dcdcdc;
+    }
+    td{
+        padding: 5px 0;
+    }
+    td > span{
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: green;
+}
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  font-size: 2rem;
+  //padding: 0.1rem;
+  border: 0.18rem solid #579757;
+  border-radius: 0.5rem;
+    cursor: pointer;
+}
+input[type="checkbox"]::before {
+  content: "";
+  width: 20px;
+  //height: 20px;
+  //clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%);
+  transform: scale(0);
+  background-color: #579757;
+}
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+input[type="checkbox"]:hover {
+  color: black;
+}
+</style>
+</html>
